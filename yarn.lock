@@ -3905,6 +3905,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hyperlane-xyz/sdk@patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch":
+  version: 7.2.0
+  resolution: "@hyperlane-xyz/sdk@patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch::version=7.2.0&hash=6275d7"
+  dependencies:
+    "@arbitrum/sdk": "npm:^4.0.0"
+    "@aws-sdk/client-s3": "npm:^3.577.0"
+    "@chain-registry/types": "npm:^0.50.14"
+    "@cosmjs/cosmwasm-stargate": "npm:^0.32.4"
+    "@cosmjs/stargate": "npm:^0.32.4"
+    "@hyperlane-xyz/core": "npm:5.8.2"
+    "@hyperlane-xyz/utils": "npm:7.2.0"
+    "@safe-global/api-kit": "npm:1.3.0"
+    "@safe-global/protocol-kit": "npm:1.3.0"
+    "@safe-global/safe-deployments": "npm:1.37.8"
+    "@solana/spl-token": "npm:^0.4.9"
+    "@solana/web3.js": "npm:^1.95.4"
+    bignumber.js: "npm:^9.1.1"
+    cosmjs-types: "npm:^0.9.0"
+    cross-fetch: "npm:^3.1.5"
+    ethers: "npm:^5.7.2"
+    pino: "npm:^8.19.0"
+    viem: "npm:^2.21.45"
+    zod: "npm:^3.21.2"
+  peerDependencies:
+    "@ethersproject/abi": "*"
+    "@ethersproject/providers": "*"
+  checksum: 10/10b8aff1270476f06561e60551e992903e02e26046d2eb11669eea7821b04573e36487f58e14dcd29d6d708e7da5d83e2f804206a7f6095930b597d85669a5d0
+  languageName: node
+  linkType: hard
+
 "@hyperlane-xyz/utils@npm:7.2.0":
   version: 7.2.0
   resolution: "@hyperlane-xyz/utils@npm:7.2.0"
@@ -3940,7 +3970,7 @@ __metadata:
     "@ethersproject/providers": "npm:^5.7.2"
     "@headlessui/react": "npm:^2.2.0"
     "@hyperlane-xyz/registry": "npm:6.1.0"
-    "@hyperlane-xyz/sdk": "npm:7.2.0"
+    "@hyperlane-xyz/sdk": "patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch"
     "@hyperlane-xyz/utils": "npm:7.2.0"
     "@hyperlane-xyz/widgets": "npm:7.2.0"
     "@interchain-ui/react": "npm:^1.23.28"
