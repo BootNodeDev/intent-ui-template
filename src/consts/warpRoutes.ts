@@ -22,6 +22,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       name: 'ITT',
       standard: 'Intent',
       symbol: 'ITT',
+      protocol: 'ethereum',
     },
     {
       addressOrDenom: ITT,
@@ -37,6 +38,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       name: 'ITT',
       standard: 'Intent',
       symbol: 'ITT',
+      protocol: 'ethereum',
     },
   ],
   options: {},
