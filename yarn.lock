@@ -3907,7 +3907,7 @@ __metadata:
 
 "@hyperlane-xyz/sdk@patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch":
   version: 7.2.0
-  resolution: "@hyperlane-xyz/sdk@patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch::version=7.2.0&hash=6275d7"
+  resolution: "@hyperlane-xyz/sdk@patch:@hyperlane-xyz/sdk@npm%3A7.2.0#~/.yarn/patches/@hyperlane-xyz-sdk-npm-7.2.0-84fab5b120.patch::version=7.2.0&hash=2c784f"
   dependencies:
     "@arbitrum/sdk": "npm:^4.0.0"
     "@aws-sdk/client-s3": "npm:^3.577.0"
@@ -3931,7 +3931,7 @@ __metadata:
   peerDependencies:
     "@ethersproject/abi": "*"
     "@ethersproject/providers": "*"
-  checksum: 10/10b8aff1270476f06561e60551e992903e02e26046d2eb11669eea7821b04573e36487f58e14dcd29d6d708e7da5d83e2f804206a7f6095930b597d85669a5d0
+  checksum: 10/f7b7f7d3069113ac4a3a39ad95e5e523c11c5e6976aa108f38179364e461ecb44d0d165d56ba66c084e7b0827fab02dc364d499112035b414e3d814930b70751
   languageName: node
   linkType: hard
 

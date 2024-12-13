@@ -1,5 +1,5 @@
 diff --git a/dist/token/Token.js b/dist/token/Token.js
-index 78dd0627a5fea703b3f9575488ba36939bac7194..bea3e39e5bdfaa8a4a00ec396eaef710b5dfc978 100644
+index 78dd0627a5fea703b3f9575488ba36939bac7194..24516cad96eb6fe7001880fe8a16808e31641485 100644
 --- a/dist/token/Token.js
 +++ b/dist/token/Token.js
 @@ -1,4 +1,7 @@
@@ -136,7 +136,7 @@ index 78dd0627a5fea703b3f9575488ba36939bac7194..bea3e39e5bdfaa8a4a00ec396eaef710
 +        const { standard, chainName, addressOrDenom, collateralAddressOrDenom } = this;
          assert(!this.isNft(), 'NFT adapters not yet supported');
          assert(multiProvider.tryGetChainMetadata(chainName), `Token chain ${chainName} not found in multiProvider`);
-+        if (standard === TokenStandard.Intent && collateralAddressOrDenom) {
++        if (standard === 'Intent' && collateralAddressOrDenom) {
 +            return new EvmIntentTokenAdapter(chainName, multiProvider, {
 +                token: addressOrDenom,
 +                router: collateralAddressOrDenom,
@@ -145,8 +145,20 @@ index 78dd0627a5fea703b3f9575488ba36939bac7194..bea3e39e5bdfaa8a4a00ec396eaef710
          if (standard === TokenStandard.ERC20) {
              return new EvmTokenAdapter(chainName, multiProvider, {
                  token: addressOrDenom,
+diff --git a/dist/token/TokenStandard.d.ts b/dist/token/TokenStandard.d.ts
+index 6821dc5d149939fd7bafabc997af3f9f3406596b..ed735a1233b51f31109e21e1d189a8fccbe688f1 100644
+--- a/dist/token/TokenStandard.d.ts
++++ b/dist/token/TokenStandard.d.ts
+@@ -2,6 +2,7 @@ import { ProtocolType } from '@hyperlane-xyz/utils';
+ import { ProviderType } from '../providers/ProviderType.js';
+ import { TokenType } from './config.js';
+ export declare enum TokenStandard {
++    Intent = "Intent",
+     ERC20 = "ERC20",
+     ERC721 = "ERC721",
+     EvmNative = "EvmNative",
 diff --git a/dist/token/TokenStandard.js b/dist/token/TokenStandard.js
-index cec12d7575fe5f57eabde4a9c58b422e77133e67..c9cffee3733e8442e8d56a82691e6ece9c3c6604 100644
+index cec12d7575fe5f57eabde4a9c58b422e77133e67..8c3256f267b52fd35bfbf4007d434bbc1555b1c9 100644
 --- a/dist/token/TokenStandard.js
 +++ b/dist/token/TokenStandard.js
 @@ -4,6 +4,7 @@ import { TokenType } from './config.js';
@@ -157,16 +169,48 @@ index cec12d7575fe5f57eabde4a9c58b422e77133e67..c9cffee3733e8442e8d56a82691e6ece
      TokenStandard["ERC20"] = "ERC20";
      TokenStandard["ERC721"] = "ERC721";
      TokenStandard["EvmNative"] = "EvmNative";
+@@ -39,6 +40,7 @@ export var TokenStandard;
+ // Allows for omission of protocol field in token args
+ export const TOKEN_STANDARD_TO_PROTOCOL = {
+     // EVM
++    Intent: ProtocolType.Ethereum,
+     ERC20: ProtocolType.Ethereum,
+     ERC721: ProtocolType.Ethereum,
+     EvmNative: ProtocolType.Ethereum,
 diff --git a/dist/warp/WarpCore.js b/dist/warp/WarpCore.js
-index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39fa08635d 100644
+index bf0719e27fc946986393f03d8289d24ba7c3d4df..30145c9b31ac50c9d90c5bd51b6000bbf09bfb59 100644
 --- a/dist/warp/WarpCore.js
 +++ b/dist/warp/WarpCore.js
-@@ -178,12 +178,13 @@ export class WarpCore {
-         const destinationName = this.multiProvider.getChainName(destination);
+@@ -1,9 +1,9 @@
+-import { ProtocolType, assert, convertDecimals, convertToProtocolAddress, isValidAddress, isZeroishAddress, rootLogger, } from '@hyperlane-xyz/utils';
++import { ProtocolType, assert, convertToProtocolAddress, isValidAddress, isZeroishAddress, rootLogger } from '@hyperlane-xyz/utils';
+ import { estimateTransactionFeeEthersV5ForGasUnits, } from '../providers/transactionFeeEstimators.js';
+ import { Token } from '../token/Token.js';
+ import { TokenAmount } from '../token/TokenAmount.js';
+ import { parseTokenConnectionId } from '../token/TokenConnection.js';
+-import { MINT_LIMITED_STANDARDS, TOKEN_COLLATERALIZED_STANDARDS, TOKEN_STANDARD_TO_PROVIDER_TYPE, TokenStandard, } from '../token/TokenStandard.js';
++import { TOKEN_STANDARD_TO_PROVIDER_TYPE, TokenStandard } from '../token/TokenStandard.js';
+ import { EVM_TRANSFER_REMOTE_GAS_ESTIMATE } from '../token/adapters/EvmTokenAdapter.js';
+ import { WarpCoreConfigSchema, WarpTxCategory, } from './types.js';
+ export class WarpCore {
+@@ -72,7 +72,7 @@ export class WarpCore {
+         }
+         else {
+             // Otherwise, compute IGP quote via the adapter
+-            const hypAdapter = originToken.getHypAdapter(this.multiProvider, destinationName);
++            const hypAdapter = originToken.getAdapter(this.multiProvider);
+             const destinationDomainId = this.multiProvider.getDomainId(destination);
+             const quote = await hypAdapter.quoteTransferRemoteGas(destinationDomainId);
+             gasAmount = BigInt(quote.amount);
+@@ -175,15 +175,14 @@ export class WarpCore {
+     async getTransferRemoteTxs({ originTokenAmount, destination, sender, recipient, interchainFee, }) {
+         const transactions = [];
+         const { token, amount } = originTokenAmount;
+-        const destinationName = this.multiProvider.getChainName(destination);
          const destinationDomainId = this.multiProvider.getDomainId(destination);
          const providerType = TOKEN_STANDARD_TO_PROVIDER_TYPE[token.standard];
+-        const hypAdapter = token.getHypAdapter(this.multiProvider, destinationName);
 +        const adapter = token.getAdapter(this.multiProvider);
-         const hypAdapter = token.getHypAdapter(this.multiProvider, destinationName);
          if (await this.isApproveRequired({ originTokenAmount, owner: sender })) {
              this.logger.info(`Approval required for transfer of ${token.symbol}`);
 -            const approveTxReq = await hypAdapter.populateApproveTx({
@@ -177,10 +221,16 @@ index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39
              });
              this.logger.debug(`Approval tx for ${token.symbol} populated`);
              const approveTx = {
-@@ -199,15 +200,14 @@ export class WarpCore {
-                 destination,
-             });
+@@ -193,21 +192,14 @@ export class WarpCore {
+             };
+             transactions.push(approveTx);
          }
+-        if (!interchainFee) {
+-            interchainFee = await this.getInterchainTransferFee({
+-                originToken: token,
+-                destination,
+-            });
+-        }
 -        const transferTxReq = await hypAdapter.populateTransferRemoteTx({
 -            weiAmountOrId: amount.toString(),
 -            destination: destinationDomainId,
@@ -200,7 +250,7 @@ index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39
          });
          this.logger.debug(`Remote transfer tx for ${token.symbol} populated`);
          const transferTx = {
-@@ -273,29 +273,7 @@ export class WarpCore {
+@@ -273,29 +265,7 @@ export class WarpCore {
       * Checks if destination chain's collateral is sufficient to cover the transfer
       */
      async isDestinationCollateralSufficient({ originTokenAmount, destination, }) {
@@ -231,7 +281,7 @@ index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39
      }
      /**
       * Checks if a token transfer requires an approval tx first
-@@ -303,7 +281,7 @@ export class WarpCore {
+@@ -303,7 +273,7 @@ export class WarpCore {
      async isApproveRequired({ originTokenAmount, owner, }) {
          const { token, amount } = originTokenAmount;
          const adapter = token.getAdapter(this.multiProvider);
@@ -240,7 +290,7 @@ index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39
          this.logger.debug(`Approval is${isRequired ? '' : ' not'} required for transfer of ${token.symbol}`);
          return isRequired;
      }
-@@ -317,15 +295,6 @@ export class WarpCore {
+@@ -317,15 +287,6 @@ export class WarpCore {
          const recipientError = this.validateRecipient(recipient, destination);
          if (recipientError)
              return recipientError;
@@ -256,7 +306,7 @@ index bf0719e27fc946986393f03d8289d24ba7c3d4df..bd5ddf812da357258bc2a45c98b73f39
          const balancesError = await this.validateTokenBalances(originTokenAmount, destination, sender, senderPubKey);
          if (balancesError)
              return balancesError;
-@@ -393,41 +362,6 @@ export class WarpCore {
+@@ -393,41 +354,6 @@ export class WarpCore {
          // Check 1: Check basic token balance
          if (amount > senderBalance)
              return { amount: 'Insufficient balance' };

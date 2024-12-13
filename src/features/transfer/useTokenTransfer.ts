@@ -108,7 +108,7 @@ async function executeTransfer({
     const connection = originToken?.getConnectionForChain(destination);
     if (!originToken || !connection) throw new Error('No token route found between chains');
 
-    const originProtocol = originToken.protocol;
+    const originProtocol = originToken.protocol ?? 'ethereum';
     const isNft = originToken.isNft();
     const weiAmountOrId = isNft ? amount : toWei(amount, originToken.decimals);
     const originTokenAmount = originToken.amount(weiAmountOrId);
@@ -118,7 +118,7 @@ async function executeTransfer({
     const sender = getAccountAddressForChain(multiProvider, origin, activeAccounts.accounts);
     if (!sender) throw new Error('No active account found for origin chain');
 
-    const isCollateralSufficient = await warpCore.isDestinationCollateralSufficient();
+    const isCollateralSufficient = await warpCore.isDestinationCollateralSufficient({});
     if (!isCollateralSufficient) {
       toast.error('Insufficient collateral on destination for transfer');
       throw new Error('Insufficient destination collateral');
