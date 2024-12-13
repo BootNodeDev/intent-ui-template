@@ -391,9 +391,9 @@ function ReviewDetails({ visible }: { visible: boolean }) {
               <div>
                 <h4>Transaction 1: Approve Transfer</h4>
                 <div className="ml-1.5 mt-1.5 space-y-1.5 border-l border-gray-300 pl-2 text-xs">
-                  <p>{`Router Address: ${originToken?.addressOrDenom}`}</p>
-                  {originToken?.collateralAddressOrDenom && (
-                    <p>{`Collateral Address: ${originToken.collateralAddressOrDenom}`}</p>
+                  <p>{`Router Address: ${originToken?.collateralAddressOrDenom}`}</p>
+                  {originToken?.addressOrDenom && (
+                    <p>{`Token Address: ${originToken.addressOrDenom}`}</p>
                   )}
                 </div>
               </div>
@@ -475,17 +475,12 @@ async function validateForm(
     const token = getTokenByIndex(warpCore, tokenIndex);
     if (!token) return { token: 'Token is required' };
     const amountWei = toWei(amount, token.decimals);
-    const { address, publicKey: senderPubKey } = getAccountAddressAndPubKey(
-      warpCore.multiProvider,
-      origin,
-      accounts,
-    );
+    const { address } = getAccountAddressAndPubKey(warpCore.multiProvider, origin, accounts);
     const result = await warpCore.validateTransfer({
       originTokenAmount: token.amount(amountWei),
       destination,
       recipient,
       sender: address || '',
-      senderPubKey: await senderPubKey,
     });
     return result;
   } catch (error: any) {

@@ -32,7 +32,7 @@ export function CosmosWalletContext({ children }: PropsWithChildren<unknown>) {
   return (
     <ChakraProvider theme={theme}>
       <ChainProvider
-        chains={chains}
+        chains={chains as any}
         assetLists={assets}
         wallets={[...keplrWallets, ...cosmostationWallets, ...leapWithoutSnap]}
         walletConnectOptions={{

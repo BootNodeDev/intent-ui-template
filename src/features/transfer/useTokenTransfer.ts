@@ -118,10 +118,7 @@ async function executeTransfer({
     const sender = getAccountAddressForChain(multiProvider, origin, activeAccounts.accounts);
     if (!sender) throw new Error('No active account found for origin chain');
 
-    const isCollateralSufficient = await warpCore.isDestinationCollateralSufficient({
-      originTokenAmount,
-      destination,
-    });
+    const isCollateralSufficient = await warpCore.isDestinationCollateralSufficient();
     if (!isCollateralSufficient) {
       toast.error('Insufficient collateral on destination for transfer');
       throw new Error('Insufficient destination collateral');

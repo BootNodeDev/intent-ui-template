@@ -38,5 +38,30 @@
   },
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]]
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "clsx\\(([^)]*)\\)",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ]
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#48237d",
+    "activityBar.background": "#48237d",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#95562a",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#48237d",
+    "statusBar.background": "#311855",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#48237d",
+    "statusBarItem.remoteBackground": "#311855",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#311855",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#31185599",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#311855"
 }

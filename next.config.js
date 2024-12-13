@@ -58,14 +58,35 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
-  webpack(config) {
+  webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.ya?ml$/,
       use: 'yaml-loader',
     });
+
+    if (!isServer) {
+      config.resolve = {
+        ...config.resolve,
+        fallback: {
+          // fixes proxy-agent dependencies
+          net: false,
+          dns: false,
+          tls: false,
+          assert: false,
+          child_process: false,
+          // fixes next-i18next dependencies
+          path: false,
+          fs: false,
+          // fixes mapbox dependencies
+          events: false,
+          // fixes sentry dependencies
+          process: false
+        }
+      };
+    }
+
     return config;
   },
-
   async headers() {
     return [
       {

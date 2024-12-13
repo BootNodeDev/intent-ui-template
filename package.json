@@ -16,11 +16,13 @@
     "@drift-labs/snap-wallet-adapter": "^0.3.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
     "@headlessui/react": "^2.2.0",
     "@hyperlane-xyz/registry": "6.1.0",
-    "@hyperlane-xyz/sdk": "7.1.0",
-    "@hyperlane-xyz/utils": "7.1.0",
-    "@hyperlane-xyz/widgets": "7.1.0",
+    "@hyperlane-xyz/sdk": "7.2.0",
+    "@hyperlane-xyz/utils": "7.2.0",
+    "@hyperlane-xyz/widgets": "7.2.0",
     "@interchain-ui/react": "^1.23.28",
     "@metamask/post-message-stream": "6.1.2",
     "@metamask/providers": "10.2.1",
@@ -103,6 +105,7 @@
     "lit-html": "2.8.0",
     "react-fast-compare": "^3.2",
     "viem": "^2.21.41",
-    "zustand": "^4.4"
+    "zustand": "^4.4",
+    "@hyperlane-xyz/sdk": "portal:/Users/fer/repos/bn/hyperlane/monorepo/typescript/sdk"
   }
 }
