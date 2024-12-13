@@ -105,7 +105,6 @@
     "lit-html": "2.8.0",
     "react-fast-compare": "^3.2",
     "viem": "^2.21.41",
-    "zustand": "^4.4",
-    "@hyperlane-xyz/sdk": "portal:/Users/fer/repos/bn/hyperlane/monorepo/typescript/sdk"
+    "zustand": "^4.4"
   }
 }
