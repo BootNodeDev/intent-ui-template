@@ -1,4 +1,4 @@
-import { TokenStandard, type WarpCoreConfig } from '@hyperlane-xyz/sdk';
+import { type WarpCoreConfig } from '@hyperlane-xyz/sdk';
 
 const ROUTER = '0x376dc8e71a223af488d885ce04a7021f32c2d1e0';
 const ITT = '0x5f94BC7Fb4A2779fef010F96b496cD36A909E818';
@@ -20,7 +20,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       decimals: 18,
       logoURI: '/deployments/warp_routes/ETH/logo.svg',
       name: 'ITT',
-      standard: TokenStandard.Intent,
+      standard: 'Intent',
       symbol: 'ITT',
     },
     {
@@ -35,7 +35,7 @@ export const warpRouteConfigs: WarpCoreConfig = {
       decimals: 18,
       logoURI: '/deployments/warp_routes/ETH/logo.svg',
       name: 'ITT',
-      standard: TokenStandard.Intent,
+      standard: 'Intent',
       symbol: 'ITT',
     },
   ],
