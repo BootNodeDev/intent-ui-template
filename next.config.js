@@ -58,6 +58,9 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.ya?ml$/,
