@@ -14,6 +14,7 @@ import BigNumber from 'bignumber.js';
 import { Form, Formik, useFormikContext } from 'formik';
 import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
+import { zeroAddress } from 'viem';
 import { ConnectAwareSubmitButton } from '../../components/buttons/ConnectAwareSubmitButton';
 import { SolidButton } from '../../components/buttons/SolidButton';
 import { TextField } from '../../components/input/TextField';
@@ -404,7 +405,12 @@ function ReviewDetails({ visible }: { visible: boolean }) {
                 {destinationToken?.addressOrDenom && (
                   <p className="flex">
                     <span className="min-w-[6.5rem]">Remote Token</span>
-                    <span>{destinationToken.addressOrDenom}</span>
+                    <span>
+                      {destinationToken.addressOrDenom === zeroAddress ||
+                      !destinationToken.addressOrDenom
+                        ? 'Native chain token'
+                        : destinationToken.addressOrDenom}
+                    </span>
                   </p>
                 )}
                 <p className="flex">
