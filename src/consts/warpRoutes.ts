@@ -18,6 +18,12 @@ export const warpRouteConfigs: WarpCoreConfig = {
         {
           token: 'ethereum|basesepolia|' + ITT,
         },
+        {
+          token: 'ethereum|arbitrumsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|sepolia|' + ITT,
+        },
       ],
       decimals: 18,
       logoURI: '/deployments/warp_routes/ETH/logo.svg',
@@ -33,6 +39,56 @@ export const warpRouteConfigs: WarpCoreConfig = {
       connections: [
         {
           token: 'ethereum|optimismsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|arbitrumsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|sepolia|' + ITT,
+        },
+      ],
+      decimals: 18,
+      logoURI: '/deployments/warp_routes/ETH/logo.svg',
+      name: 'ITT',
+      standard: 'Intent',
+      symbol: 'ITT',
+      protocol: 'ethereum',
+    },
+    {
+      addressOrDenom: ITT,
+      chainName: 'arbitrumsepolia',
+      collateralAddressOrDenom: ROUTER,
+      connections: [
+        {
+          token: 'ethereum|optimismsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|basesepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|sepolia|' + ITT,
+        },
+      ],
+      decimals: 18,
+      logoURI: '/deployments/warp_routes/ETH/logo.svg',
+      name: 'ITT',
+      standard: 'Intent',
+      symbol: 'ITT',
+      protocol: 'ethereum',
+    },
+    {
+      addressOrDenom: ITT,
+      chainName: 'sepolia',
+      collateralAddressOrDenom: ROUTER,
+      connections: [
+        {
+          token: 'ethereum|optimismsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|arbitrumsepolia|' + ITT,
+        },
+        {
+          token: 'ethereum|basesepolia|' + ITT,
         },
       ],
       decimals: 18,
@@ -50,6 +106,12 @@ export const warpRouteConfigs: WarpCoreConfig = {
         {
           token: 'ethereum|basesepolia|' + zeroAddress,
         },
+        {
+          token: 'ethereum|arbitrumsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|sepolia|' + zeroAddress,
+        },
       ],
       decimals: 18,
       logoURI: '/deployments/warp_routes/ETH/logo.svg',
@@ -65,6 +127,56 @@ export const warpRouteConfigs: WarpCoreConfig = {
       connections: [
         {
           token: 'ethereum|optimismsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|arbitrumsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|sepolia|' + zeroAddress,
+        },
+      ],
+      decimals: 18,
+      logoURI: '/deployments/warp_routes/ETH/logo.svg',
+      name: 'ETH',
+      standard: 'IntentNative',
+      symbol: 'ETH',
+      protocol: 'ethereum',
+    },
+    {
+      addressOrDenom: zeroAddress,
+      chainName: 'arbitrumsepolia',
+      collateralAddressOrDenom: ROUTER,
+      connections: [
+        {
+          token: 'ethereum|optimismsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|basesepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|sepolia|' + zeroAddress,
+        },
+      ],
+      decimals: 18,
+      logoURI: '/deployments/warp_routes/ETH/logo.svg',
+      name: 'ETH',
+      standard: 'IntentNative',
+      symbol: 'ETH',
+      protocol: 'ethereum',
+    },
+    {
+      addressOrDenom: zeroAddress,
+      chainName: 'sepolia',
+      collateralAddressOrDenom: ROUTER,
+      connections: [
+        {
+          token: 'ethereum|optimismsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|arbitrumsepolia|' + zeroAddress,
+        },
+        {
+          token: 'ethereum|basesepolia|' + zeroAddress,
         },
       ],
       decimals: 18,
