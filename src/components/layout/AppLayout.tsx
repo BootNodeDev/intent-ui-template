@@ -1,3 +1,4 @@
+import { ProtocolType } from '@hyperlane-xyz/utils';
 import { MultiProtocolWalletModal } from '@hyperlane-xyz/widgets';
 import Head from 'next/head';
 import { PropsWithChildren } from 'react';
@@ -39,6 +40,7 @@ export function AppLayout({ children }: PropsWithChildren) {
       <MultiProtocolWalletModal
         isOpen={showEnvSelectModal}
         close={() => setShowEnvSelectModal(false)}
+        protocols={[ProtocolType.Ethereum]}
       />
       <SideBarMenu
         onClose={() => setIsSideBarOpen(false)}
@@ -53,8 +55,8 @@ const styles = {
   container: {
     backgroundColor: BACKGROUND_COLOR,
     backgroundImage: BACKGROUND_IMAGE,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'auto',
+    backgroundRepeat: 'repeat',
     backgroundPosition: 'center',
   },
 };
