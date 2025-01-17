@@ -1,3 +1,7 @@
+# Intent UI Template
+
+This repo has been deprecated and is now part of the Intents Framework. Please find the Intents Framework repository here: [https://github.com/BootNodeDev/intents-framework](https://github.com/BootNodeDev/intents-framework)
+
 # Hyperlane Warp Route UI Template
 
 This repo contains an example web interface for interchain tokens built with [Hyperlane Warp Route](https://docs.hyperlane.xyz/docs/reference/applications/warp-routes). Warp is a framework to permisionlessly bridge tokens to any chain.
